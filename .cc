@@ -1,22 +1,22 @@
-#include<bits/stdc++.h>						
-#ifdef unix								
+#include<bits/stdc++.h>
+#ifdef unix
 #include <math.h>
 #include <iostream>
 #include <conio.h>
 #include <cstdlib>
 #include <stdlib.h>
-#include <unistd.h>				
-#define delay(x) usleep(x*1000)				
-#define CLS() cout<<"\033[2J\033[1;1H"		
+#include <unistd.h>
+#define delay(x) usleep(x*1000)
+#define CLS() cout<<"\033[2J\033[1;1H"
 int login();
-void gotoxy(int x,int y){					
+void gotoxy(int x,int y){
  	printf("%c[%d;%df",0x1B,y,x)
  }
 #endif
-#ifndef unix							
-#define CLS() system("cls")					
+#ifndef unix
+#define CLS() system("cls")
 #include<windows.h>
-void gotoxy(int x,int y){					
+void gotoxy(int x,int y){
 	y--;
 	static HANDLE h=NULL;
 	if(!h){
@@ -25,54 +25,54 @@ void gotoxy(int x,int y){
 	COORD c = {x,y};
 	SetConsoleCursorPosition(h,c);
 }
-void delay(unsigned int secs){				
+void delay(unsigned int secs){
 	clock_t goal = secs +  clock();
-	while(goal>clock());					
+	while(goal>clock());
 }
 
-#endif						
-#define FLBSTUD "student.txt"				
-#define FLBCLAS "class.txt"					
-#define RULE(x) cout<<'\n'; for(int _=0;_<80;_++) cout<<x; cout<<'\n' 
-#define CL(cl,x) cl==0?1:cl==x				
+#endif
+#define FLBSTUD "student.txt"
+#define FLBCLAS "class.txt"
+#define RULE(x) cout<<'\n'; for(int _=0;_<80;_++) cout<<x; cout<<'\n'
+#define CL(cl,x) cl==0?1:cl==x
 using namespace std;
-int strcmpi(const char * s1, const char* s2){			
+int strcmpi(const char * s1, const char* s2){
 	return strcasecmp(s1,s2);
 }
 bool strcmpis(pair <string, int> s1, pair <string,int> s2){ //Compare function for sort()
 	return (strcasecmp(s1.first.c_str(),s2.first.c_str()))<0;
 }
-void load(){								
+void load(){
 	CLS();
 	cout<<"\n\n\n\n\t\t\t\t  Loading\n\n";
 	for (int i=0;i<80;i++){
 		cout<<"!";
-		gotoxy(i,3);						
+		gotoxy(i,3);
 		cout<<"!";
-		cout.flush();						
-		gotoxy(i+1,7);						
+		cout.flush();
+		gotoxy(i+1,7);
 		delay((rand()%80) + 20);
 	}
 	cout.flush();
 	delay(200);
 }
-int scan(){							
-	string ch;						
+int scan(){
+	string ch;
 	int i,v;
 	do{
 		v=1;
 		cin>>ch;
-		for(i=0;i<ch.size();i++){	
+		for(i=0;i<ch.size();i++){
 			if(!isdigit(ch[i])){
 				v=0;
 				break;
 			}
-		}	
+		}
 	}while(!v);
-	return atoi(ch.c_str());	
+	return atoi(ch.c_str());
 }
-char bGs[8][4] = {"A+","B+", "AB+", "O+", "A-", "B-", "AB-", "O-"}; 
-int fee[12] = {						
+char bGs[8][4] = {"A+","B+", "AB+", "O+", "A-", "B-", "AB-", "O-"};
+int fee[12] = {
 1000,
 1000,
 1000,
@@ -97,7 +97,7 @@ char * strTitle(int x){				//Coverting Title from Integer to readable text
 	return title;
 }
 
-class Student {						
+class Student {
 	int title;  //Master  = 1, Mr = 2, Miss = 3
 	char studentName[30];
 	int rollNo;
@@ -106,8 +106,8 @@ class Student {
 	char address[80];
 	char bloodGroup[4];
 	public:
-	void getDetails(void);			
-	void printDetails(void){		
+	void getDetails(void);
+	void printDetails(void){
 		cout<<"Student Name  : "<<strTitle(title)<<' '<<studentName<<endl;
 		cout<<"Roll No.      : "<<rollNo<<endl;
 		cout<<"Father's Name : "<<fatherName<<endl;
@@ -115,10 +115,10 @@ class Student {
 		cout<<"Address       : "<<address<<endl;
 		cout<<"Blood Group   : "<<bloodGroup<<endl;
 	}
-	int retRollNo(){				
+	int retRollNo(){
 		return rollNo;
 	}
-	char * retString(char x){		
+	char * retString(char x){
 		if(x=='T')
 			return strTitle(title);
 		if(x=='N')
@@ -132,10 +132,10 @@ class Student {
 		if(x=='B')
 			return bloodGroup;
 	}
-	char * retStudentName(){		
+	char * retStudentName(){
 		return retString('N');
 	}
-	void modDetail(char ch);		
+	void modDetail(char ch);
 };
 
 void Student::getDetails(){			//Get Student Details from user
@@ -188,7 +188,7 @@ system("CLS");
 		cout<<"Enter Student Name    : ";
 		do{
 			gets(studentName);
-		}while(strlen(studentName)==0);	
+		}while(strlen(studentName)==0);
 	}
 	else if(ch=='R'){
 		int r=rollNo;					//Save current Roll No.
@@ -222,7 +222,7 @@ system("CLS");
 		cout<<"Enter Mother Name     : ";
 		do{
 			gets(motherName);
-		}while(strlen(motherName)==0);	
+		}while(strlen(motherName)==0);
 	}
 	else if(ch=='A'){
 		cout<<"Enter Address         : ";
@@ -234,7 +234,7 @@ system("CLS");
 		cout<<"Enter Blood Group     : ";
 		int v = 0,i;
 		do{
-			gets(bloodGroup);				
+			gets(bloodGroup);
 			for (i=0;i<strlen(bloodGroup);i++) bloodGroup[i] = toupper(bloodGroup[i]);
 			for(i=0;i<8;i++)
 				if(!strcmp(bloodGroup,bGs[i])){
@@ -252,7 +252,7 @@ class Class {						//Class  for storing Records in class file
 	public:
 	void getDetails();				//Get Class Record Detail from user
 	void printDetails(int i=1){		//Print Class Record Details
-	
+
 		cout<<"Student Name   : "<<studentName<<endl;
 		if(i)
 			cout<<"Class Standard : "<<class_standard<<endl;
@@ -307,7 +307,7 @@ system("CLS");
 		cout<<"Enter Student Name              : ";
 		do{
 			gets(studentName);
-		}while(strlen(studentName)==0);	
+		}while(strlen(studentName)==0);
 	}
 	else if(ch=='R'){
 		fstream fl(FLBCLAS,ios::in|ios::binary);
@@ -517,7 +517,7 @@ int searchClassID(const string str = "search"){		//Searching Class Record by dif
 		gets(query);
 	}while(strlen(query)==0);
 
-	
+
 	while(!fl.eof()){
 		fl.read((char*)&obj,sizeof(obj));
 		if(fl.eof()){
@@ -544,7 +544,7 @@ system("CLS");
 	if((!fl)||fl.tellg()==0){						//If file is empty or zero size
 		cout<<" No Records Found !\n";
 		return 0;
-	} 
+	}
 	fl.close();
 	fl.open(FLBSTUD,ios::in|ios::binary);
 	char ch;
@@ -675,7 +675,7 @@ void sortByStudents(char ch){			//Sort Records
 			cout<<"Empty Records !\n";
 			return;
 		}
-		sort(lst.begin(),lst.end(),strcmpis);	//Sort using <algorithm> sort and Custom Comparison 
+		sort(lst.begin(),lst.end(),strcmpis);	//Sort using <algorithm> sort and Custom Comparison
 		fstream tmp("temp.txt",ios::out|ios::binary);
 		fl.open(FLBCLAS,ios::in|ios::binary);
 		fl.seekg(0,ios::beg);
@@ -707,7 +707,7 @@ void sortByStudents(char ch){			//Sort Records
 		cout<<"Enter criteria to sort :\n";
 		cout<<"  (N)ame of Student.\n";
 		cout<<"  (T)itle.\n";
-		cout<<"Enter your choice : \n";		
+		cout<<"Enter your choice : \n";
 		do{
 			cin>>c;
 			c=toupper(c);
@@ -728,7 +728,7 @@ void sortByStudents(char ch){			//Sort Records
 			cout<<"Empty Records !\n";
 			return;
 		}
-		sort(lst.begin(),lst.end(),strcmpis);	//Sort using <algorithm> sort and Custom Comparison 
+		sort(lst.begin(),lst.end(),strcmpis);	//Sort using <algorithm> sort and Custom Comparison
 		fstream tmp("temp.txt",ios::out|ios::binary);
 		fl.open(FLBSTUD,ios::in|ios::binary);
 		fl.seekg(0,ios::beg);
@@ -771,7 +771,7 @@ system("CLS");
 		if (r==obj.retRollNo()){
 			cout<<"Record with following info will be deleted :\n\n";
 			obj.printDetails();
-			cout<<"Do you wish to continue ? (Y/N) : ";
+			cout<<"Do you want to resume ? (Y/N) : ";
 			do{
 				cin>>ch;
 				ch = toupper(ch);
@@ -793,7 +793,7 @@ system("CLS");
 	remove(FLBCLAS);
 	rename("temp.dat",FLBCLAS);
 	if(f)
-		cout<<"Record Successfully Deleted !\n";
+		cout<<"Record Successfully erased !\n";
 	else
 		cout<<"No Such Record Exists !\n";
 }
@@ -814,16 +814,16 @@ system("CLS");
 		if(fl.eof())
 			break;
 		if (r==obj.retRollNo()){
-			cout<<"Record with following info will be deleted :\n\n";
+			cout<<"Record with following information will be erased :\n\n";
 			obj.printDetails();
-			cout<<"Do you wish to continue ? (Y/N) : ";
+			cout<<"Do you want to resume ? (Y/N) : ";
 			do{
 				cin>>ch;
 				ch = toupper(ch);
 			}while(ch!='N' && ch!='Y');
 			if(ch=='N'){
-				cout<<"Deletion Aborted !\n";
-				
+				cout<<"Deletion cancelled !\n";
+
 				fl.close();
 				fo.close();
 				remove("temp.dat");
@@ -888,7 +888,7 @@ int dispByStandard(){					//Display each Class record by Standard
 	for(cl=1;cl<=12;cl++){
 		cnt=0;
 		fl.close();
-		fl.open(FLBCLAS, ios::in|ios::binary);		//Starts with Class 1 to 12 and checks each class 
+		fl.open(FLBCLAS, ios::in|ios::binary);		//Starts with Class 1 to 12 and checks each class
 		while(!fl.eof()){
 			fl.read((char*)&obj, sizeof(obj));
 			if(fl.eof())
@@ -898,7 +898,7 @@ int dispByStandard(){					//Display each Class record by Standard
 				if(cnt==0){
 					RULE('*');
 					cout<<"\t\t\t\t  Class "<<cl;
-					RULE('*'); 
+					RULE('*');
 					cnt=1;
 				}
 				obj.printDetails(0);
@@ -1018,7 +1018,7 @@ system("CLS");
 		}
 }
 
-int main(){
+ int main(){
 	char ch;
 	char ch1;
 	int ch2;
@@ -1031,12 +1031,12 @@ int main(){
 		cout<<"\t1. Student Database Management.\n";
 		cout<<"\t2. Class Database Management.\n";
 		cout<<"\t0. Exit.\n\n";
-		cout<<"Enter your choice : ";
+		cout<<"Enter your option : ";
 		fflush(stdin);
 		cin>>ch1;
 		if(ch1=='1'){
 			fflush(stdin);
-			
+
 			load();
 			do{
 				CLS();
@@ -1141,8 +1141,9 @@ int main(){
 						break;
 				}
 				fflush(stdin);
-				if(ch2)a
+				if(ch2){
 					cin>>ch;
+				}
 				else{
 					load();
 				}
