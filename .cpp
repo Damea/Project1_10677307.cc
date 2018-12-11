@@ -8,7 +8,8 @@
 #include <unistd.h>
 #define delay(x) usleep(x*1000)
 #define CLS() cout<<"\033[2J\033[1;1H"
-int login();
+int login()
+	using namespace std;
 void gotoxy(int x,int y){
  	printf("%c[%d;%df",0x1B,y,x)
  }
